@@ -22,9 +22,6 @@ jobs:
 
       - name: build node modules
         run: yarn install
-        
-      - name: Build Application
-        run: yarn build
 
       - name: Build Docker Image
         run: sudo docker build -t app .

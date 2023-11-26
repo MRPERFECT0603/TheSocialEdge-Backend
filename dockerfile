@@ -3,16 +3,11 @@
 FROM node:16-alpine
 
 # Working directory be app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package.json .
-
-###  Installing dependencies
+COPY  . .
 
 RUN yarn install 
-
-# copy local files to app folder
-COPY . .
 
 EXPOSE 8000
 

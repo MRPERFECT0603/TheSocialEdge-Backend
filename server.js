@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   next()
 });
 app.use(express.json());
-app.use(cors({ origin: "http://13.49.223.232:5173" }));
+app.use(cors({ origin: "http://13.49.223.232:3000" }));
 app.use(cookieParser());
 
 const storage = multer.diskStorage({
@@ -36,11 +36,11 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json(file.filename);
 });
 
-app.get("/logout" , (req,res)=>{
+app.get("/logout", (req, res) => {
   res.clearCookie("accessToken", {
     secure: true,
     samesite: "none"
-}).status(200).json("User has been loged out!!!");
+  }).status(200).json("User has been loged out!!!");
 });
 
 app.use("/api/users", require("./Routes/users"));

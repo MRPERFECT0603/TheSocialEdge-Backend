@@ -1,11 +1,11 @@
-const mysql  = require("mysql");
+const mysql = require("mysql");
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"Mysql@0603",
-    database:"TheSocialEdge"
+    host: "mysql",
+    user: "root",
+    password: "root",
+    database: "TheSocialEdge"
 });
 
 
-module.exports =  db ;
+module.exports = db;

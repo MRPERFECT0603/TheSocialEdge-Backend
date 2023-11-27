@@ -30,8 +30,8 @@ const updateUser = (req, res) => {
                 req.body.name,
                 req.body.city,
                 req.body.website,
-                req.body.coverPic,
                 req.body.profilePic,
+                req.body.coverPic,
                 UserInfo.id,
             ],
             (err, data) => {

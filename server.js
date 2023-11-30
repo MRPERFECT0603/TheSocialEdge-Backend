@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next()
 });
 app.use(express.json());
-app.use(cors({ origin: "http://13.49.223.232:3000" }));
+app.use(cors({ origin: "http://13.48.5.48:3000" }));
 app.use(cookieParser());
 
 // const storage = multer.diskStorage({

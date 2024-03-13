@@ -2,25 +2,25 @@ const moment = require("moment/moment");
 const db = require("../connect");
 const jwt = require("jsonwebtoken");
 
-const getComments = (req,res) => {
+const getComments = (req, res) => {
 
-        const q = `SELECT c.*, u.id AS userId, name, profilePic FROM comments AS c JOIN users AS u ON (u.id = c.userId)
+    const q = `SELECT c.*, u.id AS userId, name, profilePic FROM comments AS c JOIN users AS u ON (u.id = c.userId)
         WHERE c.postId = ? 
         ORDER BY c.createdAt DESC`;
 
-        db.query(q, [req.query.postId] ,(err, data) => {
-            if (err) return res.status(500).json(err);
-            return res.status(200).json(data);
-        })
-    };
+    db.query(q, [req.query.postId], (err, data) => {
+        if (err) return res.status(500).json(err);
+        return res.status(200).json(data);
+    })
+};
 
 
 
-const addComment = (req,res) => {
+const addComment = (req, res) => {
 
     const token = req.cookies.accessToken;
     if (!token)
-        return res.token(401).json("Not Logged In!!!");
+        return res.status(401).json("Not Logged In!!!");
 
     jwt.verify(token, "secretKey", (err, UserInfo) => {
         if (err) return res.status(403).json("Token is not valid!!!");
@@ -34,7 +34,7 @@ const addComment = (req,res) => {
             req.body.postId
         ];
 
-        db.query(q, [values] ,(err, data) => {
+        db.query(q, [values], (err, data) => {
             if (err) return res.status(500).json(err);
             return res.status(200).json("Comment  has been Created!!!");
         })
@@ -43,4 +43,4 @@ const addComment = (req,res) => {
 };
 
 
-module.exports = {getComments , addComment};
+module.exports = { getComments, addComment };

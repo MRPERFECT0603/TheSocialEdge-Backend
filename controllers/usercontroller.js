@@ -17,7 +17,7 @@ const getUser = (req, res) => {
 const updateUser = (req, res) => {
     const token = req.cookies.accessToken;
     if (!token)
-        return res.token(401).json("Not Logged In!!!");
+        return res.status(401).json("Not Logged In!!!");
 
     jwt.verify(token, "secretKey", (err, UserInfo) => {
         if (err) return res.status(403).json("Token is not valid!!!");

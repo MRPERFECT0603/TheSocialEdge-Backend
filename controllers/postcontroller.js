@@ -7,9 +7,9 @@ const getPosts = (req, res) => {
 
     const userId = req.query.userId;
     const token = req.cookies.accessToken;
-    if (!token)
+    if (!token) {
         return res.status(401).json("Not Logged In!!!");
-
+    }
     jwt.verify(token, "secretKey", (err, UserInfo) => {
         if (err) return res.status(403).json("Token is not valid!!!");
 
@@ -28,14 +28,14 @@ const getPosts = (req, res) => {
         })
     })
 
-
-
-
 };
+
+
 const addPost = (req, res) => {
     const token = req.cookies.accessToken;
+    console.log("Token:" ,token);
     if (!token)
-        return res.token(401).json("Not Logged In!!!");
+        return res.status(401).json("Not Logged In!!!");
 
     jwt.verify(token, "secretKey", (err, UserInfo) => {
         if (err) return res.status(403).json("Token is not valid!!!");
@@ -61,7 +61,7 @@ const addPost = (req, res) => {
 const deletePost = (req, res) => {
     const token = req.cookies.accessToken;
     if (!token)
-        return res.token(401).json("Not Logged In!!!");
+        return res.status(401).json("Not Logged In!!!");
 
     jwt.verify(token, "secretKey", (err, UserInfo) => {
         if (err) return res.status(403).json("Token is not valid!!!");
@@ -76,4 +76,6 @@ const deletePost = (req, res) => {
         })
     })
 };
+
+
 module.exports = { getPosts, addPost, deletePost };

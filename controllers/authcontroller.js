@@ -43,14 +43,17 @@ const login = (req, res) => {
             return res.status(400).json("Wrong Username or Password!!!");
 
 
-        const token = jwt.sign({ id: data[0].id }, "secretKey");
-
+        const token = jwt.sign({ id: data[0].id }, "secretKey", { expiresIn: "2h" });
 
         const { password, ...others } = data[0];
+        console.log(token);
 
         res.cookie("accessToken", token, {
             httpOnly: true,
+            sameSite: "None",
+            secure: true,
         }).status(200).json(others);
+
     });
 
 }
